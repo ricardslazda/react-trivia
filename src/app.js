@@ -8,6 +8,7 @@ import {
     setActiveQuestionIndex,
     setGameStatus,
     startGame,
+    resetGame,
     TRIVIA_GAME_STATUS_FINISHED,
 } from "./features/trivia/triviaSlice";
 import GameResult from "./features/trivia/GameResult";
@@ -36,12 +37,13 @@ export const App = () => {
     }
 
     const onAnswerSelect = (isAnswerCorrect) => {
-        const isGameOver = (activeQuestionIndex + 1) === questionCount;
+        const nextQuestionIndex = activeQuestionIndex + 1;
+        const isGameOver = nextQuestionIndex === questionCount;
         isAnswerCorrect ? dispatch(incrementScore()) : dispatch(decrementScore());
 
         if (!isGameOver) {
-            const newActiveQuestionIndex = activeQuestionIndex + 1
-            dispatch(setActiveQuestionIndex(newActiveQuestionIndex))
+            const newActiveQuestionIndex = nextQuestionIndex;
+            dispatch(setActiveQuestionIndex(newActiveQuestionIndex));
 
             navigate(`/question/${newActiveQuestionIndex}`);
         } else {
@@ -50,7 +52,10 @@ export const App = () => {
         }
     }
 
-    const onPlayAgain = () => navigate('/');
+    const onPlayAgain = () => {
+        navigate('/');
+        dispatch(resetGame());
+    };
 
     return (
         <div>

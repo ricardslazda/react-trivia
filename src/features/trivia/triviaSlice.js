@@ -33,6 +33,11 @@ const triviaSlice = createSlice({
             state.activeQuestionIndex = 0;
             state.score = defaultScore;
         },
+        resetGame: (state) => {
+            state.gameStatus = TRIVIA_GAME_STATUS_NEW;
+            state.activeQuestionIndex = 0;
+            state.score = defaultScore;
+        },
         incrementScore: (state) => {
             state.score.points += 25;
             state.score.correctAnswers++;
@@ -58,6 +63,7 @@ export const {
     setActiveQuestionIndex,
     setGameStatus,
     startGame,
+    resetGame,
     incrementScore,
     decrementScore,
 } = triviaSlice.actions;
