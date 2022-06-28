@@ -1,0 +1,20 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.padding-bottom-center {
+  padding-bottom: 10vh;
+}
+
+.answer {
+  &--correct {
+    color: green;
+  }
+
+  &--incorrect {
+    color: red;
+  }
+}
